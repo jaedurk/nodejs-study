@@ -18,23 +18,34 @@
             </tr>
         </thead>
         <tbody>
+            {{#each posts}}
             <tr>
-                <td><a href="/detail/">타이틀</a></td>
-                <td style="text-align: center">작성자이름</td>
-                <td style="text-align: center">99999</td>
-                <td style="text-align: center">2022.12.25</td>
+                <td><a href="/detail/{{_id}}">{{title}}</a></td>
+                <td style="text-align: center">{{writer}}</td>
+                <td style="text-align: center">{{hits}}</td>
+                <td style="text-align: center">{{dateString createdDt}}</td>
             </tr>
+            {{/each}}
         </tbody>
     </table>
 </div>
 
 <div>
-    <a>&lt;&lt;</a>
+    {{#with paginator}}
+    <a hre="/?page=1&serach={{@root.search}}">&lt;&lt;</a>
+    {{#if hasPrev}}
+    <a href="/?page={{prevPage}}&search={{@root.search}}">&lt;</a>
+    {{else}}
     <a>&lt;</a>
-    <a>1</a>
-    <a>2</a>
-    <a>3</a>
-    <a>4</a>
+    {{/if}}
+    {{#each pageList}}
+    {{#if (eq . @root.paginator.page)}}
+    <a>{{.}}</a>
+    {{else}}
+    <a href=""/?page={{nextPage}}&search={{@root.search}}>&gt;</a>
+    {{else}}
     <a>&gt;</a>
-    <a>&gt;&gt;</a>
+    {{/if}}
+    <a href="/?page={{lastPage}}&search={{@root.search}}">&gt;&gt;</a>
+    {{/with}}
 </div>
