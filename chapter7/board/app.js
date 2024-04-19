@@ -20,9 +20,9 @@ app.set("views", __dirname + "/views");
 
 app.get("/", async (req, res) => {
     const page = parseInt(req.query.page) || 1;
-    const serach = req.query.search || "";
+    const search = req.query.search || "";
     try {
-        const [posts, paginator] = await postService.list(collection, page, serach);
+        const [posts, paginator] = await postService.list(collection, page, search);
         res.render("home", {title: "테스트 게시판", search, paginator, posts});
     } catch (error) {
         console.log(error);
@@ -36,7 +36,11 @@ app.get("/write", (req, res) => {
 });
 
 app.get("/detail/:id", async (req, res) => {
-    res.render("detail", {title: "테스트 게시판"});
+    const result = await postService.getDetailPost(collection, req.params.id);
+    res.render("detail", {
+        title: "테스트 게시판",
+        post: result.value,
+    });
 });
 
 let collection;
@@ -47,7 +51,7 @@ app.post("/write", async (req, res) => {
     res.redirect(`/detail/${result.insertedId}`);
 });
 
-app.listen(3002, async () => {
+app.listen(3000, async () => {
     console.log("Server started");
     const mongoClient = await mongodbConnection();
     collection = mongoClient.db().collection("post");

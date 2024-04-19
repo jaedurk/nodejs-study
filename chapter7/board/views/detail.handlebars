@@ -1,16 +1,17 @@
 <h1>{{title}}</h1>
-<h2 class="text-xl">제목입니다.</h2>
+{{#with post}}
+<h2 class="text-xl">{{title}}</h2>
 <div>
-    작성자 :<b>작성자 이름</b>
+    작성자 :<b>{{writer}}</b>
 </div>
 <div>
-    조회수 : 999 | 작성일시 : 2022-01-01 00:00:00
+    조회수 : {{hits}} | 작성일시 : {{dateString createdDt}}
     <button onclick="modifyPost()">수정</button>
     <button onclick="deletePost()">삭제</button>
 </div>
 
 <div>
-    <pre>본문입니다. 하이호이</pre>
+    <pre>{{content}}</pre>
 </div>
 
 <section>
@@ -47,9 +48,26 @@
         <pre>{{comment}}</pre>
     </div>
 </section>
-
+{{/with}}
 <footer>
     <div>
         <a href="/">목록으로</a>
     </div>
 </footer>
+<script>
+const postOption = {
+    method: 'POST',
+    header: {
+        'Content-type': 'application/json',
+    }
+}
+async function modifyPost(){
+    const password = prompt('패스워드를 입력해주세요');
+    if(!password) {
+        return;
+    }
+
+
+}
+async function deletePost(){}
+</script>
