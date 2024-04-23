@@ -31,11 +31,7 @@ app.get("/", async (req, res) => {
 
 });
 
-app.get("/write", (req, res) => {
-    res.render("write", {title: "테스트 게시판", mode: "create"});
-});
-
-app.get("modify/:id", async (req, res) => {
+app.get("/modify/:id", async (req, res) => {
     const post = await postService.getPostById(collection, req.params.id);
     console.log(post);
     res.render("write", {title: "테스트 게시판 ", mode: "modify", post});
@@ -65,27 +61,29 @@ app.get("/detail/:id", async (req, res) => {
 });
 
 app.post("/check-password", async (req, res) => {
-
-    // console.log('res : ', res.body);
     const {id, password} = req.body;
 
-    const post = await postService.getPostByIdAndPassword(collection, {id, password});
+    const post = postService.getPostByIdAndPassword(collection, {id, password});
 
     if (!post) {
         return res.status(404).json({isExist: false});
     } else {
         return res.json({isExist: true})
     }
-})
+});
 
-let collection;
 //글쓰기
+app.get("/write", (req, res) => {
+    res.render("write", {title: "테스트 게시판", mode: "create"});
+});
+
 app.post("/write", async (req, res) => {
     const post = req.body;
     const result = await postService.writePost(collection, post);
     res.redirect(`/detail/${result.insertedId}`);
 });
 
+let collection;
 app.listen(3000, async () => {
     console.log("Server started");
     const mongoClient = await mongodbConnection();

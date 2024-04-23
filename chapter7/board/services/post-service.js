@@ -4,7 +4,7 @@ const {ObjectId} = require('mongodb');
 async function writePost(collection, post) {
     post.hits = 0;
     post.createdDt = new Date().toISOString();
-    return await collection.insertOne(post)
+    return await collection.insertOne(post);
 }
 
 //글 목록
@@ -23,8 +23,10 @@ async function list(collection, page, search) {
 }
 
 const projectionOption = {
-    password: 0,
-    "comments.password": 0,
+    projection: {
+        password: 0,
+        "comments.password": 0,
+    },
 }
 
 async function getDetailPost(collection, id) {
@@ -46,7 +48,7 @@ async function updatePost(collection, id, post) {
     const toUpdatePost = {
         $set: {
             ...post,
-        }
+        },
     };
     return await collection.updateOne({_id: ObjectId(id)}, toUpdatePost);
 }
