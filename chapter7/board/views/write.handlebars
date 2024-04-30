@@ -1,9 +1,9 @@
 <h1>[{{title}}] 글 {{#if (eq mode "create")}}작성{{else}}수정{{/if}}</h1>
 
 <div>
-    <form name="boardForm" method="post" {{#if (eq mode "create")}} action="/write" {{else}}action="/modify" {{/if}}>
+    <form name="boardForm" method="post" {{#if (eq mode "create")}}action="/write" {{else}}action="/modify" {{/if}}>
         {{#if (eq mode "modify")}}
-        <input type="hidden" name="id" value="{{post.id}}" />
+        <input type="hidden" name="id" value="{{post._id}}" />
         {{/if}}
 
         <div>

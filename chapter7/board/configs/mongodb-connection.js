@@ -1,4 +1,4 @@
-const { MongoClient} = require("mongodb");
+const {MongoClient} = require("mongodb");
 
 const uri = "mongodb+srv://jdlee:1004dangg@cluster0.vcd9cxy.mongodb.net/board";
 
