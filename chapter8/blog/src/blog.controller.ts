@@ -3,10 +3,11 @@ import { BlogService } from "./blog.service";
 
 @Controller('blog')
 export class BlogController {
-    blogService: BlogService;
-    constructor() {
-        this.blogService = new BlogService();
-    }
+    // blogService: BlogService;
+    // constructor() {
+    //     this.blogService = new BlogService();
+    // }
+    constructor(private blogService: BlogService) {}
 
     @Get()
     getAllPost() {
