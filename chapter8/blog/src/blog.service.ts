@@ -1,18 +1,32 @@
 import { PostDto } from './blog.model';
 
-export class BlogService {
-    posts = [];
+import { BlogFileRepository, BlogRepository } from "./blog.repository";
 
-    getAllPosts() {
-        return this.posts;
+export class BlogService {
+    // posts = [];
+    blogRepository: BlogRepository;
+
+    constructor() {
+        this.blogRepository = new BlogFileRepository();
+    }
+
+    async getAllPosts() {
+        return await this.blogRepository.getAllPost();
     }
 
     createPost(postDto: PostDto) {
-        const id = this.posts.length + 1;
-        this.posts.push({ id: id.toString(), ...postDto, createdDt: new Date() });
+        this.blogRepository.createPost(postDto);
     }
 
-    getPost(id) {
+    async getPost(id) {
+        return await this.blogRepository.getPost(id);
+    }
 
+    delete(id) {
+        this.blogRepository.deletePost(id);
+    }
+
+    updatePost(id, postDto: PostDto) {
+        this.blogRepository.updatePost(id, postDto);
     }
 }
