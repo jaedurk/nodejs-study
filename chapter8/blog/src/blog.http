@@ -20,11 +20,11 @@ GET {{server}}/blog/6641d4cc8f9defc8099e4836
 DELETE {{server}}/blog/6641d4cc8f9defc8099e4836
 
 ###게시글 수정
-PUT {{server}}/blog/6641d4cc8f9defc8099e4836
+PUT {{server}}/blog/6642f4381bc4db3ba59a8e1c
 Content-Type: application/json
 
 {
-  "title": "타이틀 수정4",
-  "content": "본문 수정4",
-  "name": "jerome.kim"
+  "title": "ㅅㄷㄴㅅ1",
+  "content": "ㅅㄷㄴㅅ1",
+  "name": "ㅅㄷㄴㅅ1"
 }

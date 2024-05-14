@@ -82,8 +82,8 @@ export class BlogMongoRepository implements BlogRepository {
         await this.blogModel.findByIdAndDelete(id);
     }
 
-    async updatePost(id: string, postDto: PostDto) {
-        const updatePost = {id, ...postDto, updatedDt: new Date()};
-        await this.blogModel.findByIdAndUpdate(id, updatePost);
+    async updatePost(_id: string, postDto: PostDto) {
+        const updatePost = {_id, ...postDto, updatedDt: new Date()};
+        await this.blogModel.findByIdAndUpdate(_id, updatePost);
     }
 }
