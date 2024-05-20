@@ -30,7 +30,7 @@ export class BlogFileRepository implements BlogRepository {
     async createPost(postDto: PostDto) {
         const posts = await this.getAllPost();
         const id = posts.length + 1;
-        const createPost = {id: id.toString(), ...postDto, createdDt: new Date()}
+        const createPost = {id: id.toString(), ...postDto, createdDt: new Date()};
         posts.push(createPost);
         await writeFile(this.FILE_NAME, JSON.stringify(posts));
     }
